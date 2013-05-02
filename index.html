@@ -1,0 +1,195 @@
+<!doctype html>
+<html ng-app="productDetail">
+	<head>
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
+		<style>
+			.productdetail {
+				background: #ffffff; /* Old browsers */
+				background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #3f4c6b 100%); /* FF3.6+ */
+				background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#3f4c6b)); /* Chrome,Safari4+ */
+				background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#3f4c6b 100%); /* Chrome10+,Safari5.1+ */
+				background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#3f4c6b 100%); /* Opera 12+ */
+				background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#3f4c6b 100%); /* IE10+ */
+				background: radial-gradient(ellipse at center,  #ffffff 0%,#3f4c6b 100%); /* W3C */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#3f4c6b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+			}
+			.productdetail {
+				position: fixed;
+				z-index: 1050;
+				background-color: #ffffff;
+				border: 1px solid #999;
+				border: 1px solid rgba(0, 0, 0, 0.3);
+				*border: 1px solid #999;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+				border-radius: 6px;
+				outline: none;
+				-webkit-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+				-moz-box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+				box-shadow: 0 3px 7px rgba(0, 0, 0, 0.3);
+				-webkit-background-clip: padding-box;
+				-moz-background-clip: padding-box;
+				background-clip: padding-box;
+			}
+			.productdetail.fade {
+				top: -25%;
+				-webkit-transition: opacity 0.3s linear, top 0.3s ease-out;
+				-moz-transition: opacity 0.3s linear, top 0.3s ease-out;
+				-o-transition: opacity 0.3s linear, top 0.3s ease-out;
+				transition: opacity 0.3s linear, top 0.3s ease-out;
+			}
+
+			.productdetail.fade.in {
+				top: 10%;
+			}
+
+			.productdetail-header {
+				padding-top: 20px;
+				border-bottom: 1px solid #eee;
+			}
+
+			.productdetail-header .close {
+				margin-top: 2px;
+			}
+
+			.productdetail-header h3 {
+				margin: 0;
+				line-height: 30px;
+			}
+
+			.productdetail-body {
+				position: relative;
+				max-height: 400px;
+				padding: 15px;
+				overflow-y: auto;
+			}
+
+			.productdetail-form {
+				margin-bottom: 0;
+			}
+
+			.productdetail-footer {
+				margin-bottom: 0;
+				text-align: right;
+				-webkit-border-radius: 0 0 6px 6px;
+				-moz-border-radius: 0 0 6px 6px;
+				border-radius: 0 0 6px 6px;
+				*zoom: 1;
+				-webkit-box-shadow: inset 0 1px 0 #ffffff;
+				-moz-box-shadow: inset 0 1px 0 #ffffff;
+				box-shadow: inset 0 1px 0 #ffffff;
+			}
+
+			.productdetail-footer:before, .productdetail-footer:after {
+				display: table;
+				line-height: 0;
+				content: "";
+			}
+
+			.productdetail-footer:after {
+				clear: both;
+			}
+
+			.productdetail-footer .btn + .btn {
+				margin-bottom: 0;
+				margin-left: 5px;
+			}
+
+			.productdetail-footer .btn-group .btn + .btn {
+				margin-left: -1px;
+			}
+
+			.productdetail-footer .btn-block + .btn-block {
+				margin-left: 0;
+			}
+		</style>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+		<script src="ui-bootstrap-custom-0.4.0-SNAPSHOT.min.js"></script>
+		<script src="ui-bootstrap-custom-tpls-0.4.0-SNAPSHOT.min.js"></script>
+		<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	</head>
+	<body>
+		<div ng-controller="ModalDemoCtrl">
+			<button class="btn" ng-click="open()">
+				Open me!
+			</button>
+			<div modal="shouldBeOpen" close="close()" options="opts">
+				<div class="productdetail-header">
+					<div class="container-fluid">
+						<div class="row-fluid">
+							<div class="span12">
+								<div class="clip">
+									<img src="dirtydonny.JPG"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="productdetail-body">
+					<ul>
+						<li ng-repeat="item in items">
+							{{item}}
+						</li>
+					</ul>
+				</div>
+				<div class="productdetail-footer">
+					<button class="btn btn-warning cancel" ng-click="close()">
+						Cancel
+					</button>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var pd = angular.module('productDetail', ['ui.bootstrap']);
+		
+		pd.controller('ModalDemoCtrl',['$scope', '$window', '$timeout', function($scope, $window, $timeout){
+			$scope.open = function() {
+				$scope.shouldBeOpen = true;
+				
+				$scope.viewportHt = $window.innerHeight * 0.95;
+				$scope.viewportWd = $window.innerWidth * 0.95;
+				$scope.viewporttop = $window.innerHeight * 0.025;
+				$scope.viewportleft = $window.innerWidth * 0.025;
+				
+				$timeout(function(){
+					$('.productdetail').css({
+						'width':$scope.viewportWd+'px', 
+						'height':$scope.viewportHt+'px', 
+						'top': $scope.viewporttop+'px',
+						'left': $scope.viewportleft+'px'
+					});
+				}, 50);
+			};
+			
+			angular.element($window).bind('resize', function() {
+				$scope.viewportHt = $window.innerHeight * 0.95;
+				$scope.viewportWd = $window.innerWidth * 0.95;
+				$scope.viewporttop = $window.innerHeight * 0.025;
+				$scope.viewportleft = $window.innerWidth * 0.025;
+				
+				$timeout(function(){
+					$('.productdetail').css({
+						'width':$scope.viewportWd+'px', 
+						'height':$scope.viewportHt+'px', 
+						'top': $scope.viewporttop+'px',
+						'left': $scope.viewportleft+'px'
+					});
+				}, 50);
+			});
+
+			$scope.close = function() {
+				$scope.closeMsg = 'I was closed at: ' + new Date();
+				$scope.shouldBeOpen = false;
+			};
+
+			$scope.items = ['item1', 'item2'];
+
+			$scope.opts = {
+				backdropFade : true,
+				dialogFade : true,
+				dialogClass: 'productdetail'
+			};
+		}]);
+	</script>
+</html>
