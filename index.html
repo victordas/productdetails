@@ -183,8 +183,10 @@
 				$scope.viewportWd = $window.innerWidth * 0.95;
 				$scope.viewporttop = $window.innerHeight * 0.025;
 				$scope.viewportleft = $window.innerWidth * 0.025;
-				$scope.productheight = $scope.viewportHt/2 - 40;
-				$scope.mashupheight = $scope.productheight/2;
+				$scope.productheight = ($scope.viewportHt - 80) * .7 ;
+				$scope.textdetailheight = ($scope.viewportHt - 80) * .3;
+				$scope.mashupheight = $scope.textdetailheight/2;
+				
 				$timeout(function(){
 					$('.productdetail').css({
 						'width':$scope.viewportWd+'px', 
@@ -192,8 +194,8 @@
 						'top': $scope.viewporttop+'px',
 						'left': $scope.viewportleft+'px'
 					});
-					$('.textdetail').css('height', $scope.productheight);
 					$('#wrap').css('height', $scope.productheight);
+					$('.textdetail').css('height', $scope.textdetailheight);
 					$('.mashup').css('height', $scope.mashupheight);
 					$("#image").panzoom();
 				}, 50);
@@ -204,8 +206,9 @@
 				$scope.viewportWd = $window.innerWidth * 0.95;
 				$scope.viewporttop = $window.innerHeight * 0.025;
 				$scope.viewportleft = $window.innerWidth * 0.025;
-				$scope.productheight = $scope.viewportHt/2 - 40;
-				$scope.mashupheight = $scope.productheight/2;
+				$scope.productheight = ($scope.viewportHt - 80) * .7 ;
+				$scope.textdetailheight = ($scope.viewportHt - 80) * .3;
+				$scope.mashupheight = $scope.textdetailheight/2;
 				
 				$timeout(function(){
 					$('.productdetail').css({
@@ -214,8 +217,8 @@
 						'top': $scope.viewporttop+'px',
 						'left': $scope.viewportleft+'px'
 					});
-					$('.textdetail').css('height', $scope.productheight);
 					$('#wrap').css('height', $scope.productheight);
+					$('.textdetail').css('height', $scope.textdetailheight);
 					$('.mashup').css('height', $scope.mashupheight);
 					$("#image").panzoom();
 				}, 50);
