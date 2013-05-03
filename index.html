@@ -36,6 +36,7 @@
 			}
 			.productdetail img {
 				vertical-align: middle;
+				width: 100%;
 			}
 			.productdetail.fade {
 				top: -25%;
@@ -116,12 +117,15 @@
 			.textdetail, .mashup {
 				border: 1px solid orange;
 			}
+			.productdetail-body, .productdetail-header, .productdetail-footer {
+				position: relative;
+			}
 		</style>
 		<script src="angular.min.js"></script>
 		<script src="ui-bootstrap-custom-0.4.0-SNAPSHOT.min.js"></script>
 		<script src="ui-bootstrap-custom-tpls-0.4.0-SNAPSHOT.min.js"></script>
 		<script src="jquery-1.9.1.min.js"></script>
-		<script src="jquery.hammer.js"></script>
+		<script src="jquery.panzoom.js"></script>
 	</head>
 	<body>
 		<div ng-controller="ModalDemoCtrl">
@@ -190,14 +194,7 @@
 					$('.textdetail').css('height', $scope.productheight);
 					$('#wrap').css('height', $scope.productheight);
 					$('.mashup').css('height', $scope.mashupheight);
-					
-					var el = document.getElementById('image');
-					Hammer(el).on("pinchout", function(event) {
-						$(el).css('transform', 'scale(2,2)');
-					});
-					Hammer(el).on("pinchin", function(event) {
-						$(el).css('transform', 'scale(1,1)');
-					});
+					$("#image").panzoom();
 				}, 50);
 			};
 			
@@ -219,14 +216,7 @@
 					$('.textdetail').css('height', $scope.productheight);
 					$('#wrap').css('height', $scope.productheight);
 					$('.mashup').css('height', $scope.mashupheight);
-					
-					var el = document.getElementById('image');
-					Hammer(el).on("swipeleft", function(event) {
-						$(el).css('zoom', '200%');
-					});
-					Hammer(el).on("swiperight", function(event) {
-						$(el).css('zoom', '100%');
-					});
+					$("#image").panzoom();
 				}, 50);
 			});
 
